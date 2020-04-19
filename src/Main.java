@@ -2,6 +2,11 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+    /* Class to handle user input (from command line or otherwise)
+        Receives features of the text from TextParser class and sends to Metric class
+        Receives scores from Metric class displays the scores from different metrics
+     */
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String inPath;
@@ -30,6 +35,16 @@ public class Main {
         displayScore(choice, numSentences, numWords, numChars, numSyllables, numPolySyllables);
     }
 
+    /**
+     * Calculates the readability score based on different metrics and displays according to the user's choice
+     * @param metric the metric to be displayed ("ari", "fk", "cl", "smog", or "all")
+     * @param numSentences the # of sentences in the text
+     * @param numWords the # of words in the text
+     * @param numChars the # of characters in the text
+     * @param numSyllables the # of syllables in the text
+     * @param numPolySyllables the # of polysyllables in the text
+     * @return the suitable age of users that can understand the text
+     */
     private static int displayScore(String metric, int numSentences, int numWords, int numChars, int numSyllables, int numPolySyllables) {
         double score;
         switch(metric.toLowerCase()) {
