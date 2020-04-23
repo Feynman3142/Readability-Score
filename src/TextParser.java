@@ -35,15 +35,23 @@ class TextParser {
                 // English sentences end with periods (.), exclamation points (!), or question marks (?)
                 // Also account for the fact that these may be accompanied with quotes
                 // Use that to split text into sentences
-                String[] sentences = text.split("[.?!]+[”'\"]*\\s*");
+                String[] sentences = text.split("[.?!]+[”'\"\\s]*");
                 numSentences += sentences.length;
-                final Pattern eosPattern = Pattern.compile("[.?!]+[”'\"]*");
+                final Pattern eosPattern = Pattern.compile("[.?!]+[”'\"\\s]*");
                 Matcher eosPatternMatcher = eosPattern.matcher(text);
                 // Since we split on the above pattern, those characters need to be accounted for
                 // This is done in the following lines
                 while (eosPatternMatcher.find()) {
                     // This formula is used to account for consecutive . or ! or ? (eg: '!?') along with quotes
-                    numChars += eosPatternMatcher.end() - eosPatternMatcher.start();
+                    // Since spaces might also be present, we have to check for them and not count them in the
+                    // number of characters
+                    String eosSymbolStr = eosPatternMatcher.group();
+                    for (int ind = 0; ind < eosSymbolStr.length(); ++ind) {
+                        if (!eosSymbolStr.substring(ind, ind + 1).matches("\\s+")) {
+                            ++numChars;
+                        }
+                    }
+                    //numChars += eosPatternMatcher.end() - eosPatternMatcher.start();
                 }
                 for (String sentence : sentences) {
                     // Counts every group of characters that doesn't contain any 'space' characters as a word
