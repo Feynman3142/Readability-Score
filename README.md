@@ -19,7 +19,7 @@ Difficulty: Medium
 The file path can simply be written without specifying any option as it is the only option available
 After the text is parsed to determine the important characteristics required for metric evaluation, the user can choose which metric should be displayed or alternatively if all should be displayed.
 
-![Demo](https://drive.google.com/uc?export=view&id=157IwLWdJwhSzbh2mlbssyX4mQc1NxGIG)
+![Demo](media/demo.jpg)
 
 ### Dependencies
 
